@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "three.js": "^0.73.2"
+  },
+  "devDependencies": {
+    "connect": "^3.4.1",
+    "serve-static": "^1.10.2"
+  }
+}
