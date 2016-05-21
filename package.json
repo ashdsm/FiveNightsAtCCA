@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "three-loaders-collada": "^1.0.1",
     "three.js": "^0.73.2"
   },
   "devDependencies": {
