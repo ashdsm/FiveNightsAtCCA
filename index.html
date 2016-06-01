@@ -9,14 +9,14 @@
     
     function init() {
         var scene = new THREE.Scene();
-        var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+        var camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
         var renderer = new THREE.WebGLRenderer();
         renderer.setSize( window.innerWidth, window.innerHeight );
         document.body.appendChild( renderer.domElement );
         
         var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-        var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+        var material = new THREE.MeshLambertMaterial( { color: 0x00ff00 } );
         var cube = new THREE.Mesh( geometry, material );
         scene.add( cube );
         
@@ -25,10 +25,25 @@
 
         camera.position.z = 10;
         camera.position.y = 5;
+        camera.rotation.x = -30 * Math.PI / 180;
         
+        var makelight = function(x,y,z,strength) {
+            var directionalLight = new THREE.DirectionalLight( 0xffffff, strength );
+            directionalLight.position.set( x, y, z );
+            scene.add( directionalLight );
+        };
+        
+        makelight(-.5,1,.5, 1);
+        makelight(.5,1,.5, .5);
+        makelight(0,-1,0, .5);
+        
+        var point=0;
         function render() {
             requestAnimationFrame( render );
             
+            point += .001;
+            
+            camera.rotation.y = Math.sin(point); //1 * Math.PI / 180;
             cube.rotation.x += 0.01;
             cube.rotation.y += 0.1;
             renderer.render( scene, camera );
